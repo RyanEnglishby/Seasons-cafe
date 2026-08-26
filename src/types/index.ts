@@ -32,8 +32,21 @@ export interface MenuCategory {
 }
 
 export interface OpeningHoursRow {
+  /** Display label, e.g. "Tuesday – Friday" or "Monday". */
   days: string;
+  /** Display label, e.g. "8:30am – 4:00pm" or "Closed". */
   hours: string;
+  /**
+   * Machine-readable form of the same row, used to generate the
+   * LocalBusiness openingHoursSpecification in src/lib/schema.ts. Omit for
+   * a "Closed" row — there's nothing to emit. Keep in sync with `hours`
+   * whenever it changes.
+   */
+  schema?: {
+    days: string[];
+    opens: string;
+    closes: string;
+  };
 }
 
 export interface Review {

@@ -1,4 +1,13 @@
-import { CONTACT, LOCATION, OVERALL_RATING, SITE_NAME, SITE_URL, SOCIAL_LINKS } from "@/data/site-config";
+import {
+  CONTACT,
+  LOCATION,
+  OPENING_HOURS,
+  OPENING_HOURS_VERIFIED,
+  OVERALL_RATING,
+  SITE_NAME,
+  SITE_URL,
+  SOCIAL_LINKS,
+} from "@/data/site-config";
 
 /**
  * Builds the LocalBusiness (CafeOrCoffeeShop) structured data for Google.
@@ -7,11 +16,6 @@ import { CONTACT, LOCATION, OVERALL_RATING, SITE_NAME, SITE_URL, SOCIAL_LINKS } 
  * site-config.ts. Nothing here is invented — as real details are confirmed
  * and flipped to `verified: true`, this schema fills itself in without any
  * further code changes.
- *
- * Opening hours are deliberately left out of this schema until the owners
- * confirm them (see OPENING_HOURS_VERIFIED in site-config.ts) — most cafés
- * manage hours directly through their Google Business Profile, which takes
- * priority in search results anyway.
  */
 export function localBusinessJsonLd(): Record<string, unknown> {
   const address: Record<string, string> = {
@@ -52,6 +56,17 @@ export function localBusinessJsonLd(): Record<string, unknown> {
       ratingValue: OVERALL_RATING.average,
       reviewCount: OVERALL_RATING.count,
     };
+  }
+  if (OPENING_HOURS_VERIFIED) {
+    const specs = OPENING_HOURS.filter((row) => row.schema).map((row) => ({
+      "@type": "OpeningHoursSpecification",
+      dayOfWeek: row.schema!.days,
+      opens: row.schema!.opens,
+      closes: row.schema!.closes,
+    }));
+    if (specs.length > 0) {
+      schema.openingHoursSpecification = specs;
+    }
   }
 
   return schema;

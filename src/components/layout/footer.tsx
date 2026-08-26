@@ -64,9 +64,13 @@ export function Footer() {
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.2em] text-cream-400/70">Visit</p>
           <address className="mt-5 space-y-1 text-sm not-italic leading-relaxed text-cream-200">
+            {LOCATION.streetAddress.verified && LOCATION.streetAddress.value ? (
+              <p>{LOCATION.streetAddress.value}</p>
+            ) : null}
             <p>{LOCATION.town}</p>
             <p>{LOCATION.county}</p>
             <p>{LOCATION.country}</p>
+            {LOCATION.eircode.verified && LOCATION.eircode.value ? <p>{LOCATION.eircode.value}</p> : null}
           </address>
           <ul className="mt-4 space-y-2 text-sm">
             <li>

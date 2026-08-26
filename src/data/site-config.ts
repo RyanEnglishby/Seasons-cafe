@@ -32,9 +32,8 @@ export const LOCATION = {
   town: "Emly",
   county: "Co. Tipperary",
   country: "Ireland",
-  /** Street address / townland, e.g. "Main Street" — confirm exact wording with the owners. */
-  streetAddress: { value: "", verified: false } satisfies Verified<string>,
-  eircode: { value: "", verified: false } satisfies Verified<string>,
+  streetAddress: { value: "Main Street", verified: true } satisfies Verified<string>,
+  eircode: { value: "E34 W016", verified: true } satisfies Verified<string>,
 } as const;
 
 /** Used for the "Get Directions" link and the map embed — no API key required. */
@@ -44,8 +43,11 @@ export const DIRECTIONS_URL = `https://www.google.com/maps/dir/?api=1&destinatio
 
 export const CONTACT = {
   phone: {
-    value: "+353 XX XXX XXXX",
-    verified: false,
+    // Given as "062 57649" — converted to international format (drop the
+    // domestic leading 0 from the area code) so it dials correctly from
+    // any phone, while still reading clearly.
+    value: "+353 62 57649",
+    verified: true,
   } satisfies Verified<string>,
   email: {
     value: "hello@seasonscafe.ie",
@@ -59,18 +61,26 @@ export const SOCIAL_LINKS: SocialLink[] = [
 ];
 
 /**
- * Opening hours. Replace `hours` for each row once confirmed, e.g.
- * "8:00am – 5:00pm", and set OPENING_HOURS_VERIFIED to true so the
- * homepage/contact page drop the "to be confirmed" note and the
- * structured data (src/lib/schema.ts) starts publishing hours to
- * Google.
+ * Opening hours. Each row pairs a display label with the machine-readable
+ * `schema` fields used for Google's structured data — update both together
+ * (see the OpeningHoursRow type). Omit `schema` for a "Closed" row.
  */
 export const OPENING_HOURS: OpeningHoursRow[] = [
-  { days: "Monday – Friday", hours: "To be confirmed" },
-  { days: "Saturday", hours: "To be confirmed" },
-  { days: "Sunday", hours: "To be confirmed" },
+  { days: "Monday", hours: "Closed" },
+  {
+    days: "Tuesday – Friday",
+    hours: "8:30am – 4:00pm",
+    schema: { days: ["Tuesday", "Wednesday", "Thursday", "Friday"], opens: "08:30", closes: "16:00" },
+  },
+  {
+    days: "Saturday – Sunday",
+    hours: "9:00am – 4:00pm",
+    schema: { days: ["Saturday", "Sunday"], opens: "09:00", closes: "16:00" },
+  },
 ];
-export const OPENING_HOURS_VERIFIED = false;
+export const OPENING_HOURS_VERIFIED = true;
+/** Shown under the hours table/list once verified. Set to `null` to hide it. */
+export const OPENING_HOURS_NOTE: string | null = "Closed on bank holidays.";
 
 /**
  * Set to a real, confirmed aggregate once Seasons shares their Google or

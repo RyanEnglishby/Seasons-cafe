@@ -9,6 +9,7 @@ import {
   DIRECTIONS_URL,
   LOCATION,
   OPENING_HOURS,
+  OPENING_HOURS_NOTE,
   OPENING_HOURS_VERIFIED,
   SITE_NAME,
   SOCIAL_LINKS,
@@ -35,9 +36,13 @@ export function VisitSection() {
               </h3>
               <address className="mt-3 space-y-0.5 text-sm not-italic leading-relaxed text-charcoal-600">
                 <p>{SITE_NAME}</p>
+                {LOCATION.streetAddress.verified && LOCATION.streetAddress.value ? (
+                  <p>{LOCATION.streetAddress.value}</p>
+                ) : null}
                 <p>{LOCATION.town}</p>
                 <p>{LOCATION.county}</p>
                 <p>{LOCATION.country}</p>
+                {LOCATION.eircode.verified && LOCATION.eircode.value ? <p>{LOCATION.eircode.value}</p> : null}
               </address>
               <div className="mt-4">
                 <Button href={DIRECTIONS_URL} variant="secondary" target="_blank" rel="noopener noreferrer">
@@ -64,11 +69,15 @@ export function VisitSection() {
                   </li>
                 ))}
               </ul>
-              {!OPENING_HOURS_VERIFIED ? (
+              {OPENING_HOURS_VERIFIED ? (
+                OPENING_HOURS_NOTE ? (
+                  <p className="mt-3 text-xs text-charcoal-500">{OPENING_HOURS_NOTE}</p>
+                ) : null
+              ) : (
                 <p className="mt-3 text-xs text-charcoal-400">
                   Hours shown are placeholders — please check our Facebook/Instagram for up-to-date times.
                 </p>
-              ) : null}
+              )}
             </div>
 
             <div>
