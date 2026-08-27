@@ -56,8 +56,16 @@ export const CONTACT = {
 } as const;
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { platform: "Instagram", url: null, label: "@seasonscafe" },
-  { platform: "Facebook", url: null, label: "Seasons Café & Bakeshop" },
+  {
+    platform: "Instagram",
+    url: "https://www.instagram.com/seasonscafeandbakeshop/",
+    label: "@seasonscafeandbakeshop",
+  },
+  {
+    platform: "Facebook",
+    url: "https://www.facebook.com/p/seasonscafeandbakeshop-100087707134075/",
+    label: "Seasons Café & Bakeshop",
+  },
 ];
 
 /**
