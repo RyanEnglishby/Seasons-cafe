@@ -25,8 +25,13 @@ export const SITE_NAME = "Seasons Café & Bakeshop";
 /**
  * Production domain. Set the NEXT_PUBLIC_SITE_URL environment variable in
  * the Vercel project once a domain is chosen — no code change needed.
+ *
+ * Uses `||` rather than `??` deliberately: a Vercel env var added with an
+ * empty value comes through as `""`, not `undefined`, and `??` would keep
+ * that empty string instead of falling back — `new URL("")` then throws
+ * and crashes the entire build.
  */
-export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://seasons-cafe.vercel.app";
+export const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://seasons-cafe.vercel.app";
 
 export const LOCATION = {
   town: "Emly",
