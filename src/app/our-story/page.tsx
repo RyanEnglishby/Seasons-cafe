@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import type { PlaceholderIconName } from "@/components/ui/placeholder-image";
@@ -14,10 +15,28 @@ export const metadata = pageMetadata({
   path: "/our-story",
 });
 
-const SECTION_IMAGES: Record<string, { icon: PlaceholderIconName; label: string; tone: "light" | "warm" }> = {
-  "the-story": { icon: "interior", label: "The café frontage in Emly", tone: "light" },
+/**
+ * Real photo where one exists and genuinely matches the section; otherwise
+ * the placeholder graphic. Don't fill a `photo` in just to remove a
+ * placeholder — a mismatched real photo is worse than an honest one.
+ */
+const SECTION_IMAGES: Record<
+  string,
+  { icon: PlaceholderIconName; label: string; tone: "light" | "warm"; photo?: { src: string; alt: string } }
+> = {
+  "the-story": {
+    icon: "interior",
+    label: "The café frontage in Emly",
+    tone: "light",
+    photo: { src: "/images/story-storefront.jpg", alt: "The front of Seasons Café & Bakeshop on Main Street, Emly" },
+  },
   "the-people": { icon: "coffee", label: "The team behind the counter", tone: "warm" },
-  "the-building": { icon: "interior", label: "The building Seasons calls home", tone: "light" },
+  "the-building": {
+    icon: "interior",
+    label: "The building Seasons calls home",
+    tone: "light",
+    photo: { src: "/images/story-stone-wall.jpg", alt: "The stone wall dining room at Seasons Café & Bakeshop" },
+  },
   "our-approach": { icon: "bake", label: "Baking in progress in the kitchen", tone: "warm" },
   community: { icon: "pastry", label: "Seasons and the Emly community", tone: "light" },
 };
@@ -48,12 +67,24 @@ export default function OurStoryPage() {
               className="grid items-center gap-10 py-16 lg:grid-cols-2 lg:gap-20 lg:py-20"
             >
               <Reveal className={reversed ? "lg:order-2" : undefined}>
-                <PlaceholderImage
-                  label={image.label}
-                  icon={image.icon}
-                  tone={image.tone}
-                  className="aspect-[5/4] w-full rounded-sm"
-                />
+                {image.photo ? (
+                  <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm">
+                    <Image
+                      src={image.photo.src}
+                      alt={image.photo.alt}
+                      fill
+                      sizes="(min-width: 1024px) 45vw, 100vw"
+                      className="object-cover"
+                    />
+                  </div>
+                ) : (
+                  <PlaceholderImage
+                    label={image.label}
+                    icon={image.icon}
+                    tone={image.tone}
+                    className="aspect-[5/4] w-full rounded-sm"
+                  />
+                )}
               </Reveal>
               <Reveal delay={100} className={reversed ? "lg:order-1" : undefined}>
                 <div className="flex items-center gap-3">

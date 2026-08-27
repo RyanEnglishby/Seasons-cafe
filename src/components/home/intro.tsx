@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
-import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { Reveal } from "@/components/ui/reveal";
 import { LOCATION } from "@/data/site-config";
 
@@ -8,12 +8,15 @@ export function Intro() {
     <section className="bg-cream-50 py-20 sm:py-28">
       <Container size="wide" className="grid items-center gap-10 lg:grid-cols-2 lg:gap-20">
         <Reveal>
-          <PlaceholderImage
-            label="Café interior and seating area"
-            icon="interior"
-            tone="light"
-            className="aspect-[5/4] w-full rounded-sm"
-          />
+          <div className="relative aspect-[5/4] w-full overflow-hidden rounded-sm">
+            <Image
+              src="/images/interior-back-room.jpg"
+              alt="Seating at Seasons Café & Bakeshop"
+              fill
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </Reveal>
         <Reveal delay={100}>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-brown-600">About Seasons</p>

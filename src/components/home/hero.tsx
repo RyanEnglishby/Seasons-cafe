@@ -1,6 +1,6 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { PlaceholderImage } from "@/components/ui/placeholder-image";
 import { LOCATION, SITE_NAME } from "@/data/site-config";
 
 export function Hero() {
@@ -40,12 +40,16 @@ export function Hero() {
         </div>
 
         <div className="order-1 lg:order-2">
-          <PlaceholderImage
-            label="Fresh bakes and coffee at the counter"
-            icon="coffee"
-            tone="warm"
-            className="aspect-[4/5] w-full rounded-sm shadow-[0_30px_60px_-30px_rgba(43,38,30,0.35)] sm:aspect-[16/10] lg:aspect-[4/5]"
-          />
+          <div className="relative aspect-[4/5] w-full overflow-hidden rounded-sm shadow-[0_30px_60px_-30px_rgba(43,38,30,0.35)] sm:aspect-[16/10] lg:aspect-[4/5]">
+            <Image
+              src="/images/hero-counter.jpg"
+              alt="The counter and coffee bar at Seasons Café & Bakeshop"
+              fill
+              priority
+              sizes="(min-width: 1024px) 45vw, 100vw"
+              className="object-cover"
+            />
+          </div>
         </div>
       </Container>
     </section>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { FacebookIcon, InstagramIcon } from "@/components/ui/icons";
@@ -13,7 +14,14 @@ export function Footer() {
     <footer className="border-t border-charcoal-900/10 bg-charcoal-900 text-cream-200">
       <Container className="grid gap-12 py-16 sm:py-20 md:grid-cols-[1.3fr_1fr_1fr] md:gap-8">
         <div>
-          <p className="font-serif text-2xl text-cream-50">{SITE_NAME}</p>
+          <div className="flex items-center gap-3">
+            {/* The logo's ring and text are both dark, so it needs a light
+                backdrop to stay visible against the footer's dark background. */}
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-cream-50">
+              <Image src="/images/logo.png" alt="" width={40} height={40} className="h-10 w-10" />
+            </span>
+            <p className="font-serif text-2xl text-cream-50">{SITE_NAME}</p>
+          </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-cream-300">
             An independent café and bakeshop in {LOCATION.town}, {LOCATION.county}.
           </p>
