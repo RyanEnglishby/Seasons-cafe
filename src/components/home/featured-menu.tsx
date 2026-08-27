@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { Container } from "@/components/ui/container";
@@ -10,15 +11,33 @@ import { SectionHeading } from "@/components/ui/section-heading";
  * Category teasers only — deliberately no dishes or prices here (those
  * live on the /menu page). Update freely to match whichever categories
  * should be highlighted on the homepage.
+ *
+ * Set `photo` once a real photo exists for a category; leave it out to
+ * keep the placeholder graphic rather than show a photo that doesn't
+ * actually depict that category (e.g. don't reuse a lunch photo for
+ * "Fresh Baking" just to fill the slot).
  */
 const FEATURED_CATEGORIES: {
   id: string;
   title: string;
   description: string;
   icon: PlaceholderIconName;
+  photo?: { src: string; alt: string };
 }[] = [
-  { id: "breakfast", title: "Breakfast", description: "Simple, hearty plates to start the day.", icon: "pastry" },
-  { id: "lunch", title: "Lunch", description: "Soups, salads and daily specials.", icon: "interior" },
+  {
+    id: "breakfast",
+    title: "Breakfast",
+    description: "Simple, hearty plates to start the day.",
+    icon: "pastry",
+    photo: { src: "/images/menu-breakfast.jpg", alt: "Poached eggs, bacon and avocado on toasted sourdough" },
+  },
+  {
+    id: "lunch",
+    title: "Lunch",
+    description: "Soups, salads and daily specials.",
+    icon: "interior",
+    photo: { src: "/images/menu-lunch.jpg", alt: "The house burger with chips, and a strawberry salad" },
+  },
   { id: "fresh-baking", title: "Fresh Baking", description: "Baked in-house, every morning.", icon: "bake" },
   { id: "coffee", title: "Coffee", description: "Carefully made, every cup.", icon: "coffee" },
 ];
@@ -38,12 +57,24 @@ export function FeaturedMenu() {
           {FEATURED_CATEGORIES.map((category, index) => (
             <Reveal key={category.id} delay={index * 80}>
               <Link href={`/menu#${category.id}`} className="group block">
-                <PlaceholderImage
-                  label={`${category.title} at Seasons`}
-                  icon={category.icon}
-                  tone={index % 2 === 0 ? "light" : "warm"}
-                  className="aspect-[4/5] rounded-sm transition-transform duration-500 ease-out group-hover:scale-[1.03] sm:aspect-[4/3]"
-                />
+                {category.photo ? (
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-sm sm:aspect-[4/3]">
+                    <Image
+                      src={category.photo.src}
+                      alt={category.photo.alt}
+                      fill
+                      sizes="(min-width: 1024px) 22vw, 50vw"
+                      className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                    />
+                  </div>
+                ) : (
+                  <PlaceholderImage
+                    label={`${category.title} at Seasons`}
+                    icon={category.icon}
+                    tone={index % 2 === 0 ? "light" : "warm"}
+                    className="aspect-[4/5] rounded-sm transition-transform duration-500 ease-out group-hover:scale-[1.03] sm:aspect-[4/3]"
+                  />
+                )}
                 <h3 className="mt-5 font-serif text-xl text-charcoal-900 transition-colors group-hover:text-brown-700">
                   {category.title}
                 </h3>

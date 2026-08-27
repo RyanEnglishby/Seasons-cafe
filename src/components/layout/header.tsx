@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -61,11 +62,11 @@ export function Header() {
         )}
       >
         <div className="mx-auto flex h-16 max-w-8xl items-center justify-between px-6 sm:h-20 sm:px-8 lg:px-12">
-          <Link
-            href="/"
-            className="font-serif text-[1.6rem] leading-none tracking-tight text-charcoal-900 sm:text-[1.75rem]"
-          >
-            {SITE_NAME.split(" ")[0]}
+          <Link href="/" className="flex items-center gap-3">
+            <Image src="/images/logo.png" alt="" width={44} height={44} priority className="h-11 w-11" />
+            <span className="font-serif text-[1.6rem] leading-none tracking-tight text-charcoal-900 sm:text-[1.75rem]">
+              {SITE_NAME.split(" ")[0]}
+            </span>
           </Link>
 
           <nav aria-label="Primary" className="hidden md:block">
@@ -130,8 +131,11 @@ export function Header() {
         )}
       >
         <div className="flex h-16 items-center justify-between px-6 sm:h-20 sm:px-8">
-          <span className="font-serif text-[1.6rem] leading-none tracking-tight text-charcoal-900">
-            {SITE_NAME.split(" ")[0]}
+          <span className="flex items-center gap-3">
+            <Image src="/images/logo.png" alt="" width={40} height={40} className="h-10 w-10" />
+            <span className="font-serif text-[1.6rem] leading-none tracking-tight text-charcoal-900">
+              {SITE_NAME.split(" ")[0]}
+            </span>
           </span>
           <button
             ref={closeRef}

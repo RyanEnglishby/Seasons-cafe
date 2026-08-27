@@ -1,3 +1,5 @@
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
 import { ImageResponse } from "next/og";
 import { LOCATION, SITE_NAME } from "@/data/site-config";
 
@@ -12,6 +14,10 @@ export const contentType = "image/png";
 // exact match to the site's serif headings.
 
 export default function OpengraphImage() {
+  const logoDataUrl = `data:image/png;base64,${readFileSync(
+    join(process.cwd(), "public/images/logo.png"),
+  ).toString("base64")}`;
+
   return new ImageResponse(
     (
       <div
@@ -38,6 +44,7 @@ export default function OpengraphImage() {
             borderRadius: 4,
           }}
         >
+          <img src={logoDataUrl} width={110} height={110} style={{ marginBottom: 24 }} alt="" />
           <div style={{ display: "flex", fontSize: 22, letterSpacing: 8, color: "#7c532a", marginBottom: 28 }}>
             {LOCATION.town.toUpperCase()} · {LOCATION.county.toUpperCase()}
           </div>
