@@ -26,11 +26,11 @@
   --color-brown-800: #452d18;
   --color-brown-900: #2e1e10;
 
-  /* Muted olive — a quiet secondary accent, used sparingly */
-  --color-olive-400: #8b9468;
-  --color-olive-500: #707b4e;
-  --color-olive-600: #5a6440;
-  --color-olive-700: #454c32;
+  /* Pine green — sampled from the Seasons logo, used sparingly as a quiet secondary accent */
+  --color-olive-400: #78b0a2;
+  --color-olive-500: #538d7f;
+  --color-olive-600: #3c675d;
+  --color-olive-700: #1e332e;
 
   /* Warm charcoal — replaces pure black for all body text */
   --color-charcoal-500: #6b6459;
