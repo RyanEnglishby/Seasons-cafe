@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/*
+ * Seasons Café & Bakeshop — design tokens
+ * ----------------------------------------------------------------
+ * This is the single source of truth for colour and type. If the
+ * café ever wants a different accent colour or typeface, change it
+ * here and it updates everywhere on the site.
+ */
+@theme {
+  /* Warm, paper-like neutrals used for backgrounds */
+  --color-cream-50: #fefcf9;
+  --color-cream-100: #faf5ec;
+  --color-cream-200: #f3ead9;
+  --color-cream-300: #e9dbc0;
+  --color-cream-400: #dcc9a3;
+
+  /* Coffee / bakery brown — the primary brand colour */
+  --color-brown-100: #efdcc8;
+  --color-brown-200: #ddc0a0;
+  --color-brown-300: #c69c74;
+  --color-brown-400: #a97a4d;
+  --color-brown-500: #8c6138;
+  --color-brown-600: #7c532a;
+  --color-brown-700: #5b3c22;
+  --color-brown-800: #452d18;
+  --color-brown-900: #2e1e10;
+
+  /* Pine green — sampled from the Seasons logo, used sparingly as a quiet secondary accent */
+  --color-olive-400: #78b0a2;
+  --color-olive-500: #538d7f;
+  --color-olive-600: #3c675d;
+  --color-olive-700: #1e332e;
+
+  /* Warm charcoal — replaces pure black for all body text */
+  --color-charcoal-500: #6b6459;
+  --color-charcoal-600: #55504a;
+  --color-charcoal-700: #423e37;
+  --color-charcoal-800: #2a2723;
+  --color-charcoal-900: #211f1b;
+
+  --font-serif: var(--font-fraunces), "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+  --font-sans: var(--font-inter), "Segoe UI", system-ui, -apple-system, sans-serif;
+
+  --container-8xl: 90rem;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(1.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-cream-300);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-cream-100);
+    color: var(--color-charcoal-800);
+  }
+
+  ::selection {
+    background-color: var(--color-brown-300);
+    color: var(--color-brown-900);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    letter-spacing: -0.01em;
+  }
+
+  /* A visible, on-brand focus ring for every interactive element —
+     accessibility must not be sacrificed for a "clean" look. */
+  :focus-visible {
+    outline: 2px solid var(--color-brown-600);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* Skip-to-content link: hidden until keyboard-focused */
+  .skip-link {
+    position: fixed;
+    top: -3rem;
+    left: 1rem;
+    z-index: 100;
+    background-color: var(--color-charcoal-900);
+    color: var(--color-cream-100);
+    padding: 0.75rem 1.25rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    transition: top 0.2s ease;
+  }
+  .skip-link:focus {
+    top: 1rem;
+  }
+
+  /* Faint paper grain applied over warm backgrounds for a tactile,
+     printed feel instead of a flat digital gradient. */
+  .bg-grain {
+    position: relative;
+    isolation: isolate;
+  }
+  .bg-grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.05;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+}
