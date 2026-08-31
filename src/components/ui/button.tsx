@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 type Variant = "primary" | "secondary" | "ghost" | "inverse";
-type Size = "md" | "lg";
+type Size = "md" | "lg" | "xl";
 
 const base =
   "inline-flex items-center justify-center gap-2 rounded-[3px] font-medium tracking-wide transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40";
@@ -20,6 +20,8 @@ const variantStyles: Record<Variant, string> = {
 const sizeStyles: Record<Size, string> = {
   md: "px-6 py-3 text-[0.9rem]",
   lg: "px-7 py-3.5 text-base",
+  /** For a single standout hero CTA — noticeably bigger than `lg`, not just a hover effect. */
+  xl: "px-9 py-4.5 text-lg",
 };
 
 interface ButtonProps {
