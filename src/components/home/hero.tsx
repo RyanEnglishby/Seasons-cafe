@@ -30,7 +30,11 @@ export function Hero() {
             Homemade baking, honest coffee and simple food, made fresh every day in the heart of Emly.
           </p>
           <div className="animate-fade-up mt-9 flex flex-wrap items-center gap-4" style={{ animationDelay: "360ms" }}>
-            <Button href="/menu" size="lg">
+            <Button
+              href="/menu"
+              size="lg"
+              className="font-semibold shadow-[0_18px_36px_-18px_rgba(91,60,34,0.55)] hover:-translate-y-0.5 hover:shadow-[0_22px_40px_-16px_rgba(91,60,34,0.6)]"
+            >
               View Menu
             </Button>
             <Button href="/contact" variant="secondary" size="lg">
