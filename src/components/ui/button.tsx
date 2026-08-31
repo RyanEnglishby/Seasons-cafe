@@ -6,7 +6,7 @@ type Variant = "primary" | "secondary" | "ghost" | "inverse";
 type Size = "md" | "lg";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-[3px] font-medium tracking-wide transition-colors duration-200 disabled:cursor-not-allowed disabled:opacity-40";
+  "inline-flex items-center justify-center gap-2 rounded-[3px] font-medium tracking-wide transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-40";
 
 const variantStyles: Record<Variant, string> = {
   primary: "bg-brown-600 text-cream-50 hover:bg-brown-700 active:bg-brown-800",
