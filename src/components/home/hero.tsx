@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { LOCATION, SITE_NAME } from "@/data/site-config";
@@ -32,14 +33,14 @@ export function Hero() {
           <div className="animate-fade-up mt-9 flex flex-wrap items-center gap-4" style={{ animationDelay: "360ms" }}>
             <Button
               href="/menu"
-              size="lg"
+              size="xl"
               className="font-semibold shadow-[0_18px_36px_-18px_rgba(91,60,34,0.55)] hover:-translate-y-0.5 hover:shadow-[0_22px_40px_-16px_rgba(91,60,34,0.6)]"
             >
               View Menu
             </Button>
-            <Button href="/contact" variant="secondary" size="lg">
+            <ArrowLink href="/contact" className="text-charcoal-700 hover:text-brown-700">
               Find Us
-            </Button>
+            </ArrowLink>
           </div>
         </div>
 
